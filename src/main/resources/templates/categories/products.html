@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+</head>
+<body>
+    <div layout:fragment="content">
+            <h3>
+                Categorías
+                <a href="/categories/new" class="btn btn-primary ms-2">Nueva</a>
+            </h3>
+            <h4 th:text="${category.getName()} + ' Products'"></h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product: ${products}">
+                    <th scope="row" th:text="${product.getId()}">1</th>
+                    <td th:text="${product.getTitle()}"></td>
+                    <td th:text="${product.getPrice()}"></td>
+                    <td th:text="${product.getQuantity()}">@</td>
+                    <td th:text="${product.getCategory().getName()}">@</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/products/' + ${product.getId()}}">View</a>
+                        <a class="btn btn-warning" th:href="@{'/products/edit/' + ${product.getId()}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/products/delete/' + ${product.getId()}}">Delete</a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+</body>
+</html>
